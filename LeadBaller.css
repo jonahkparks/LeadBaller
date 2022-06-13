@@ -1,1 +1,135 @@
+    body,
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+        font-family: 'Raleway', sans-serif
+    }
 
+    .campaignList {
+    	position: fixed;
+    	top: 10px;
+    	right:  10px;
+        text-align: center;
+        font-size: 15px;
+        font-family: Raleway;
+        z-index: 2;
+    }
+    
+    .diamond-image {
+		width: 100%;
+		height: 100%;
+		z-index: 1;
+	}
+
+    .parent {
+		width: 100%;
+		height: 100%;
+		position: relative;
+		z-index: 1;
+	}
+	.gridLayout {
+		position:absolute;
+		width: 100%;
+		height: 100%;
+		top: 0;
+		left: 0;
+		display: flex;
+		flex-direction: row;
+		z-index: 1;
+	}
+	.diamondGrid {
+		width: 50%;
+		display: grid;
+		grid-template-rows: 0.88fr 1fr 1.05fr;
+        z-index: 1;
+	}
+
+	.insideDiamond {
+		grid-row: 2;
+		display: grid;
+		grid-template-columns: 1fr 2.5fr 1fr;
+		grid-template-rows: 1fr;
+	}
+
+	.insideDiamondGrid {
+		display: grid;
+		grid-template-columns: 1fr 0.5fr 1fr 0.5fr 1fr;
+		grid-template-rows: 1fr 0.2fr 1fr 0.2fr 1fr;
+		grid-column: 2;
+	}
+
+	.baseInfo {
+		text-align: center;
+        font-size: 25px;
+        font-family: Raleway;
+		width: 100%;
+		display: grid;
+		align-items: center;
+	}
+
+	.homePlate {
+		grid-column: 3;
+		grid-row: 5;
+    }
+    
+    .firstBase {
+		grid-column: 5;
+		grid-row: 3;
+    }
+    
+    .secondBase {
+		grid-column: 3;
+		grid-row: 1;
+    }
+    
+    .thirdBase {
+		grid-column: 1;
+		grid-row: 3;
+    }
+
+	.leftGrid {
+		width: 25%;
+        z-index: 1;
+	}
+	.rightGrid {
+		width: 25%;
+		display: grid;
+		grid-template-rows: 55% 45%;
+        z-index: 1;
+	}
+
+    .scorecardGrid {
+    	grid-row: 2;
+		display: grid;
+		grid-template-columns: 1.4fr 1fr 0.2fr 1fr 0.2fr;
+		grid-template-rows: 0.6fr 1fr 0.5fr 1fr 0.5fr 1fr 0.4fr;
+	}
+
+	.homeRuns {
+		grid-row: 2;
+		grid-column: 2;
+    }
+    
+    .leads {
+		grid-column: 4;
+		grid-row: 2;
+    }
+    
+    .popfly {
+		grid-column: 2;
+		grid-row: 4;
+    }
+
+	.strikeout {
+		grid-column: 4;
+		grid-row: 4;
+	}
+    
+    .onDeck {
+		grid-column-start: 2;
+		grid-column-end: span 3;
+		grid-row: 6;
+    }
