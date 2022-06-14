@@ -16,6 +16,7 @@
         }
     }
     </script>
+	<script src='./LeadBaller.js'></script>
     <link rel='stylesheet' href='./LeadBaller.css' type='text/css'>
 </head>
 
@@ -57,30 +58,10 @@
 		</div>
 	</div>
     <script>
-    	var campaigns = 'br4n2s75h'; // Testing App - Campaigns table
-    	// var campaigns = 'brx55z77r'; // Production App - Campaigns table
-
-		var headers = {
-			'QB-Realm-Hostname': 'leadballer.quickbase.com',
-			'Content-Type': 'application/json'
-		};
-
-		var campaignToken = '';
-
-		$.ajax({
-    		url: 'https://api.quickbase.com/v1/auth/temporary/' + campaigns,
-   			method: 'GET',
-   			async: false,
-    		headers: headers,
-    		xhrFields: { withCredentials: true },
-    		success: function(result) {
-        		campaignToken = result.temporaryAuthorization;
-    		}
-		})
 
 		headers = {
 			'QB-Realm-Hostname': 'leadballer.quickbase.com',
-			'Authorization': 'QB-TEMP-TOKEN ' + campaignToken, 
+			'Authorization': 'QB-TEMP-TOKEN ' + authenticateQuickBase("campaigns","yes"), 
 			'Content-Type': 'application/json'
 		};
 
