@@ -45,7 +45,21 @@
 
     public function load_assets() 
     {
-        wp_enqueue_style( 'quickbase-plugin-css', plugin_dir_url( __FILE__ ) . 'css/quickbase.css', array(), 1, 'all'' );
+        wp_enqueue_style( 
+            'quickbase-plugin-css', 
+            plugin_dir_url( __FILE__ ) . 'css/quickbase.css', 
+            array(), 
+            1, 
+            'all' 
+        );
+
+        wp_enqueue_script( 
+            'quickbase-plugin-js', 
+            plugin_dir_url( __FILE__ ) . 'js/quickbase.js', 
+            array('jquery'), 
+            1, 
+            false
+        );
     }
  }
 
