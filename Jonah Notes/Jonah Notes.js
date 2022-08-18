@@ -385,12 +385,20 @@ if (num < 5) {
 }
 console.log(testSize(19));
 
+// Ternary Operator: Just an alternative to IF ELSE Operator
+
+function checkEqual(a,b) {      // Format: condition ? statement if true : statement if false;
+    return a === b ? true : false;
+}
+
+console.log(checkEqual());
+
 
 
 
 /* OBJECTS */
 
-var myDog = {       //This is an object!! Dumb easy
+var myDog = {       //This is an object!!
     "name" : "Dusty",
     "legs" : 4,
     "tails" : 1,
@@ -403,3 +411,72 @@ var dogName = myDog.name;
 var dogFriends = myDog.friends
 
 console.log(dogFriends);
+
+
+
+
+/* Loops */
+
+//WHILE Loops: Will run while the argument is true, then turn off when it is false
+
+var myArray = [];
+
+var i = 0;
+while(i <5) {
+    myArray.push(i);
+    i++;
+}
+
+console.log(myArray);
+
+//FOR Loops: for (what value the loop will start at, condition (keeps looping until this is met), what changers with each loop) **Most common loop
+
+var ourArray = [];
+
+for (var i = 0; i < 5; i++) {
+    ourArray.push(i);
+}
+
+console.log(ourArray);
+
+//DO WHILE Loops   **Will always do the loop once, even if the argument is not true
+
+var myArray = [];
+var i = 10;
+
+do{
+    myArray.push(i);
+    i++;
+}   while (i < 5);
+
+console.log(i);
+
+
+
+
+/* Creating a random number function */
+
+function randomWholeNum() {
+    return Math.floor(Math.random() * 10);  //Math.floor will round down to the nearest whole # and the * 10 only allows it to pick a # between 0 and 9
+}
+
+console.log(randomWholeNum())
+
+
+
+
+/* Template Literals */
+
+const person = {
+    name: "John Brown",
+    age: 56
+};
+
+const greeting = `Hello, my name is ${person.name}! I am ${person.age} years old.`;
+
+console.log(greeting);
+
+
+
+
+//That's all, folks
