@@ -13,14 +13,17 @@
     exit;
  }
 
- class QuickBasePlugin {
+ class LBQuickBasePlugin {
 
     private $auth_token;
     private const $CAMPAIGN_PROD = 'brx55z77r';
     private const $CAMPAIGN_TEST = 'br4n2s75h';
+    private const $PROSPECTS_PROD = 'brx55z79y';
+    private const $PROSPECTS_TEST = 'br4n2s75y';
 
     public function __construct()
     {
+        /*
         // Create custom post type
         add_action('init', array($this, 'create_custom_post_type'));
 
@@ -35,8 +38,85 @@
 
         // Register REST API
         add_action('rest_api_init', array($this, 'register_rest_api'));
+        */
+
+        // Add shortcode for client logo
+        add_shortcode( 'qb-client-logo', 'load_client_logo' );
+
+        // Add shortcode for client calendly
+        add_shortcode( 'qb-client-calendly', 'load_client_calendly' );
+
+        // Add shortcode for prospect video
+        add_shortcode( 'qb-prospect-video', 'load_prospect_video' );
+
+        
     }
 
+    private function get_authentication_token($tableName, $environment)
+    {
+
+        $tableId = 'Undefined';
+
+        if ($tableName == 'Campaigns' )
+        {
+            if($environment == 'Test')
+            {
+                $tableId = $CAMPAIGN_TEST;
+            } elseif ($environment == 'Prod')
+            {
+                $tableId = $CAMPAIGN_PROD;
+            }
+        } elseif ($tableName == 'Prospects') 
+        {
+            if($environment == 'Test')
+            {
+                $tableId = $PROSPECTS_TEST;
+            } elseif ($environment == 'Prod')
+            {
+                $tableId = $PROSPECTS_PROD;
+            }
+        }
+
+        if ($tableId == 'Undefined')
+        {
+            return null;
+        }
+
+        $headers = array
+        {
+            'QB-Realm-Hostname' => 'leadballer.quickbase.com',
+            'Content-Type' => 'application/json'
+        }
+        /* var internalTable = '';
+
+        if (qbTable = 'campaigns') {
+            internalTable = (prodInstance = "yes" ? campaignsProd : campaignsTest );
+        }
+        var headers = {
+            'QB-Realm-Hostname': 'leadballer.quickbase.com',
+            'Content-Type': 'application/json'
+        };
+    
+        var authToken = '';
+    
+        $.ajax({
+            url: 'https://api.quickbase.com/v1/auth/temporary/' + internalTable,
+               method: 'GET',
+               async: false,
+            headers: headers,
+            xhrFields: { withCredentials: true },
+            success: function(result) {
+                authToken = result.temporaryAuthorization;
+            }
+        })
+        */
+    }
+
+    public function load_prospect_video ($prospectId)
+    {
+
+    }
+    
     public function create_custom_post_type()
     {
         $args = array(
@@ -59,16 +139,16 @@
     public function load_assets() 
     {
         wp_enqueue_style( 
-            'quickbase-plugin-css', 
-            plugin_dir_url( __FILE__ ) . 'css/quickbase.css', 
+            'lb-quickbase-plugin-css', 
+            plugin_dir_url( __FILE__ ) . 'css/lb-quickbase.css', 
             array(), 
             1, 
             'all' 
         );
 
         wp_enqueue_script( 
-            'quickbase-plugin-js', 
-            plugin_dir_url( __FILE__ ) . 'js/quickbase.js', 
+            'lb-quickbase-plugin-js', 
+            plugin_dir_url( __FILE__ ) . 'js/lb-quickbase.js', 
             array('jquery'), 
             1, 
             false
@@ -94,7 +174,7 @@
 
                     $.ajax({
                         method: 'post',
-                        url: '<?php echo get_rest_url(null, 'quickbase-plugin/v1/send-query');?>',
+                        url: '<?php echo get_rest_url(null, 'lb-quickbase-plugin/v1/send-query');?>',
                         headers: { 'X-WP-Nonce': nonce },
                         data: form
                     })
@@ -105,7 +185,7 @@
 
     public function register_rest_api()
     {
-        register_rest_route( 'quickbase-plugin/v1', 'send-query', array(
+        register_rest_route( 'lb-quickbase-plugin/v1', 'send-query', array(
             'methods' => 'POST',
             'callback' => array($this, 'handle_quickbase_query')
         ));
@@ -134,34 +214,5 @@
             return new WP_REST_Response('Thank you', 200);
         }
     }
-
-    private function get_authentication_token($tableId, $environment)
-    {
-
-        /* var internalTable = '';
-
-        if (qbTable = 'campaigns') {
-            internalTable = (prodInstance = "yes" ? campaignsProd : campaignsTest );
-        }
-        var headers = {
-            'QB-Realm-Hostname': 'leadballer.quickbase.com',
-            'Content-Type': 'application/json'
-        };
-    
-        var authToken = '';
-    
-        $.ajax({
-            url: 'https://api.quickbase.com/v1/auth/temporary/' + internalTable,
-               method: 'GET',
-               async: false,
-            headers: headers,
-            xhrFields: { withCredentials: true },
-            success: function(result) {
-                authToken = result.temporaryAuthorization;
-            }
-        })
-        */
-    }
- }
 
  new QuickBasePlugin();
