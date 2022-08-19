@@ -1,5 +1,7 @@
 <?php
 /**
+ * @package lb-quickbase-plugin
+ * 
  * Plugin Name: LeadBaller QuickBase Plugin
  * Description: Handles basic communication with QuickBase
  * Version: 1.0.0
@@ -13,20 +15,23 @@
     exit;
  }
 
- class LBQuickBasePlugin {
+ class LBQuickBasePlugin 
+ {
 
     private $auth_token;
     private const $CAMPAIGN_PROD = 'brx55z77r';
     private const $CAMPAIGN_TEST = 'br4n2s75h';
     private const $PROSPECTS_PROD = 'brx55z79y';
     private const $PROSPECTS_TEST = 'br4n2s75y';
+    private const $ENVIRONMENT = 'test';
 
     public function __construct()
     {
-        /*
+        
         // Create custom post type
         add_action('init', array($this, 'create_custom_post_type'));
 
+        /*
         // Add assets (js, css, etc)
         add_action('wp_enqueue_scripts', array($this, 'load_assets'));
 
@@ -50,6 +55,27 @@
         add_shortcode( 'qb-prospect-video', 'load_prospect_video' );
 
         
+    }
+
+    public function activate()
+    {
+        // Generate CPTs
+        $this->create_custom_post_type();
+
+        // Flush rewrite rules
+        flush_rewrite_rules();
+    }
+
+    public function deactivate() 
+    {
+        // flush rewrite rules
+        flush_rewrite_rules();
+    }
+
+    public function uninstall() 
+    {
+        // delete CPTs
+        // delete plugin data from the DB
     }
 
     private function get_authentication_token($tableName, $environment)
@@ -133,7 +159,23 @@
             'menu_icon' => 'dashicons-businessperson'
         );
 
-        register_post_type('quickbase_plugin_form', $args);
+        register_post_type('Clients', $args);
+
+        $args = array(
+            'public' => true,
+            'has_archive' = true,
+            'supports' => array('title', 'environment', 'tableId'),
+            'exclude_from_search' => true,
+            'publicly_queryable' => false,
+            'capability' => 'manage_options',
+            'labels' => array(
+                'name' => 'QuickBase Tables',
+                'singular_name' => 'QuickBase Table'
+            ),
+            'menu_icon' => 'dashicons-database'
+        );
+
+        register_post_type( 'QuickBase Tables', $args );
     }
 
     public function load_assets() 
@@ -214,5 +256,15 @@
             return new WP_REST_Response('Thank you', 200);
         }
     }
+}
 
- new QuickBasePlugin();
+if ( class_exists( 'LBQuickBasePlugin'))
+{
+    $lb-qb-plugin = new LBQuickBasePlugin();
+}
+
+// activation 
+register_activation_hook( __FILE__, array( $lb-qb-plugin, 'activate') );
+
+// deactivation
+register_deactivation_hook( __FILE__, array( $lb-qb-plugin, 'deactivate') );
