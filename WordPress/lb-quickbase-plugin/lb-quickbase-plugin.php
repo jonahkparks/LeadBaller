@@ -14,8 +14,8 @@ if (!defined('ABSPATH')) {
     exit;
 }
 
-if (!class_exists('LBQuickBasePlugin')) {
-    class LBQuickBasePlugin
+if (!class_exists('LBQuickBase')) {
+    class LBQuickBase
     {
         private $auth_token = '';
         private const CAMPAIGN_PROD = 'brx55z77r';
@@ -55,17 +55,13 @@ if (!class_exists('LBQuickBasePlugin')) {
 
         public function activate()
         {
-            // Generate CPTs
-            $this->create_custom_post_type();
-
-            // Flush rewrite rules
-            flush_rewrite_rules();
-        }
+            require_once plugin_dir_path( __FILE__ ) . 'inc/lb-quickbase-activate.php';
+            LBQuickBaseActivate::activate();       }
 
         public function deactivate()
         {
-            // flush rewrite rules
-            flush_rewrite_rules();
+            require_once plugin_dir_path( __FILE__ ) . 'inc/lb-quickbase-deactivate.php';
+            LBQuickBaseDeactivate::deactivate(); 
         }
 
         private function get_authentication_token($tableName, $environment)
@@ -123,41 +119,7 @@ if (!class_exists('LBQuickBasePlugin')) {
 
         public function load_prospect_video($prospectId)
         {
-        }
 
-        public function create_custom_post_type()
-        {
-            $args = array(
-                'public' => true,
-                'has_archive' => true,
-                'supports' => array('title'),
-                'exclude_from_search' => true,
-                'publicly_queryable' => false,
-                'capability' => 'manage_options',
-                'labels' => array(
-                    'name' => 'Clients',
-                    'singular_name' => 'Client Entry'
-                ),
-                'menu_icon' => 'dashicons-businessperson'
-            );
-
-            register_post_type('Clients', $args);
-
-            $args = array(
-                'public' => true,
-                'has_archive' => true,
-                'supports' => array('title', 'environment', 'tableId'),
-                'exclude_from_search' => true,
-                'publicly_queryable' => false,
-                'capability' => 'manage_options',
-                'labels' => array(
-                    'name' => 'QuickBase Tables',
-                    'singular_name' => 'QuickBase Table'
-                ),
-                'menu_icon' => 'dashicons-database'
-            );
-
-            register_post_type('QuickBase Tables', $args);
         }
 
         public function load_assets()
@@ -235,7 +197,7 @@ if (!class_exists('LBQuickBasePlugin')) {
         }
     }
 
-    $lbqbplugin = new LBQuickBasePlugin();
+    $lbqbplugin = new LBQuickBase();
 }
 
 // activation
