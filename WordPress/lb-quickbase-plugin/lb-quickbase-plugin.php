@@ -14,10 +14,18 @@ if (!defined('ABSPATH')) {
     exit;
 }
 
+if ( file_exists( dirname( __FILE__ ) . '/vendor/autoload.php'))
+{
+    require_once dirname( __FILE__ ) . '/vendor/autoload.php';
+}
+
+use Inc\Activate;
+use Inc\Deactivate;
+
 if (!class_exists('LBQuickBase')) {
     class LBQuickBase
     {
-        public $pluginName;
+        private $plugin;
         private $auth_token = '';
         private const CAMPAIGN_PROD = 'brx55z77r';
         private const CAMPAIGN_TEST = 'br4n2s75h';
@@ -26,32 +34,15 @@ if (!class_exists('LBQuickBase')) {
         private const ENVIRONMENT = 'test';
 
         function __construct() {
-            $this->$pluginName = plugin_basename( __FILE__ );
+            $this->$plugin = plugin_basename( __FILE__ );
         }
 
         public function register()
         {
-            // Create custom post type
-            add_action('init', array($this, 'create_custom_post_type'));
-
-            /*
-            // Add assets (js, css, etc)
-            add_action('wp_enqueue_scripts', array($this, 'load_assets'));
-
-            // Add shortcode
-            add_shortcode( 'load-quickbase', 'load_shortcode' );
-
-            // Load javascript
-            add_action('wp_footer', array($this, 'load_scripts'));
-
-            // Register REST API
-            add_action('rest_api_init', array($this, 'register_rest_api'));
-            */
-
             // Add admin pages
-            add_action('admin_menu', array($this, 'add-admin_pages'));
+            add_action('admin_menu', array($this, 'add_admin_pages'));
 
-            add_filter("plugin_action_links_$this->$pluginName", array($this, 'settings_link'));
+            add_filter('plugin_action_links' . $plugin, array($this, 'settings_link'));
 
             // Add shortcode for client logo
             add_shortcode('qb-client-logo', 'load_client_logo');
@@ -65,14 +56,7 @@ if (!class_exists('LBQuickBase')) {
 
         public function activate()
         {
-            require_once plugin_dir_path(__FILE__) . 'inc/lb-quickbase-activate.php';
-            LBQuickBaseActivate::activate();
-        }
-
-        public function deactivate()
-        {
-            require_once plugin_dir_path(__FILE__) . 'inc/lb-quickbase-deactivate.php';
-            LBQuickBaseDeactivate::deactivate();
+            Activate::activate();
         }
 
         public function add_admin_pages()
@@ -231,5 +215,5 @@ if (!class_exists('LBQuickBase')) {
     register_activation_hook(__FILE__, array( $lbqbplugin, 'activate'));
 
     // deactivation
-    register_deactivation_hook(__FILE__, array( $lbqbplugin, 'deactivate'));
+    register_deactivation_hook(__FILE__, array( 'Deactivate', 'deactivate'));
 }
