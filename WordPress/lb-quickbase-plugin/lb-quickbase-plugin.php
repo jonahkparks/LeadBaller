@@ -17,6 +17,7 @@ if (!defined('ABSPATH')) {
 if (!class_exists('LBQuickBase')) {
     class LBQuickBase
     {
+        public $pluginName;
         private $auth_token = '';
         private const CAMPAIGN_PROD = 'brx55z77r';
         private const CAMPAIGN_TEST = 'br4n2s75h';
@@ -24,7 +25,11 @@ if (!class_exists('LBQuickBase')) {
         private const PROSPECTS_TEST = 'br4n2s75y';
         private const ENVIRONMENT = 'test';
 
-        public function __construct()
+        function __construct() {
+            $this->$pluginName = plugin_basename( __FILE__ );
+        }
+
+        public function register()
         {
             // Create custom post type
             add_action('init', array($this, 'create_custom_post_type'));
@@ -43,6 +48,11 @@ if (!class_exists('LBQuickBase')) {
             add_action('rest_api_init', array($this, 'register_rest_api'));
             */
 
+            // Add admin pages
+            add_action('admin_menu', array($this, 'add-admin_pages'));
+
+            add_filter("plugin_action_links_$this->$pluginName", array($this, 'settings_link'));
+
             // Add shortcode for client logo
             add_shortcode('qb-client-logo', 'load_client_logo');
 
@@ -55,13 +65,31 @@ if (!class_exists('LBQuickBase')) {
 
         public function activate()
         {
-            require_once plugin_dir_path( __FILE__ ) . 'inc/lb-quickbase-activate.php';
-            LBQuickBaseActivate::activate();       }
+            require_once plugin_dir_path(__FILE__) . 'inc/lb-quickbase-activate.php';
+            LBQuickBaseActivate::activate();
+        }
 
         public function deactivate()
         {
-            require_once plugin_dir_path( __FILE__ ) . 'inc/lb-quickbase-deactivate.php';
-            LBQuickBaseDeactivate::deactivate(); 
+            require_once plugin_dir_path(__FILE__) . 'inc/lb-quickbase-deactivate.php';
+            LBQuickBaseDeactivate::deactivate();
+        }
+
+        public function add_admin_pages()
+        {
+            add_menu_page('LB QuickBase Plugin', 'QuickBase', 'manage_options', 'lbqbplugin', array($this, 'admin_index'), 'dashicons-database', 110);
+        }
+
+        public function admin_index()
+        {
+            require_once plugin_dir_path(__FILE__) . 'templates/admin.php';
+        }
+
+        public function settings_link( $links )
+        {
+            $settings_link = '<a href="admin.php?page=lbqbplugin">Settings</a>';
+            array_push( $links , $settings_link );
+            return $links;
         }
 
         private function get_authentication_token($tableName, $environment)
@@ -119,7 +147,6 @@ if (!class_exists('LBQuickBase')) {
 
         public function load_prospect_video($prospectId)
         {
-
         }
 
         public function load_assets()
@@ -198,10 +225,11 @@ if (!class_exists('LBQuickBase')) {
     }
 
     $lbqbplugin = new LBQuickBase();
+    $lbqbplugin->register();
+
+    // activation
+    register_activation_hook(__FILE__, array( $lbqbplugin, 'activate'));
+
+    // deactivation
+    register_deactivation_hook(__FILE__, array( $lbqbplugin, 'deactivate'));
 }
-
-// activation
-register_activation_hook(__FILE__, array( $lbqbplugin, 'activate'));
-
-// deactivation
-register_deactivation_hook(__FILE__, array( $lbqbplugin, 'deactivate'));
