@@ -4,8 +4,8 @@
 
     <form method="post" action="options.php">
         <?php 
-            settings_fields( 'admin_group' );
-            do_settings_sections( 'lb_plugin' );
+            settings_fields( 'settings_option_group' );
+            do_settings_sections( 'settings-admin' );
             submit_button();
         ?>
     </form>

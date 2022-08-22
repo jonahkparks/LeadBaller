@@ -39,7 +39,7 @@ class Admin extends BaseController
                 'page_title' => 'LB QuickBase Plugin',
                 'menu_title' => 'QuickBase',
                 'capability' => 'manage_options',
-                'menu_slug' => 'lb_plugin',
+                'menu_slug' => 'settings-admin',
                 'callback' => array($this->callbacks, 'adminDashboard'),
                 'icon_url' => 'dashicons-database',
                 'position' => 110
@@ -51,7 +51,7 @@ class Admin extends BaseController
     {
         $this->subpages = array(
             array(
-                'parent_slug' => 'lb_plugin',
+                'parent_slug' => 'settings-admin',
                 'page_title' => 'Environments',
                 'menu_title' => 'Environments',
                 'capability' => 'manage_options',
@@ -59,7 +59,7 @@ class Admin extends BaseController
                 'callback' => array($this->callbacks, 'environmentsPage')
             ),
             array(
-                'parent_slug' => 'lb_plugin',
+                'parent_slug' => 'settings-admin',
                 'page_title' => 'Tables',
                 'menu_title' => 'Tables',
                 'capability' => 'manage_options',
@@ -73,13 +73,9 @@ class Admin extends BaseController
     {
         $args = array(
             array(
-                'option_group' => 'admin_group',
-                'option_name' => 'text_example',
+                'option_group' => 'settings_option_group',
+                'option_name' => 'settings_option_name',
                 'callback' => array( $this->callbacks, 'optionsGroup')
-            ),
-            array(
-                'option_group' => 'admin_group',
-                'option_name' => 'first_name'
             )
         );
 
@@ -90,10 +86,10 @@ class Admin extends BaseController
     {
         $args = array(
             array(
-                'id' => 'admin_index',
+                'id' => 'settings_setting_section',
                 'title' => 'Settings',
                 'callback' => array( $this->callbacks, 'adminSection'),
-                'page' => 'lb_plugin'
+                'page' => 'settings-admin'
             )
         );
 
@@ -107,34 +103,22 @@ class Admin extends BaseController
                 'id' => 'text_example',
                 'title' => 'Text Example',
                 'callback' => array( $this->callbacks, 'textExample'),
-                'page' => 'lb_plugin',
-                'section' => 'admin_index',
-                'args' => array(
-                    'label_for' => 'text_example',
-                    'class' => 'example-class'
-                )
+                'page' => 'settings-admin',
+                'section' => 'settings_setting_section'
             ),
             array(
                 'id' => 'first_name',
                 'title' => 'First Name',
                 'callback' => array( $this->callbacks, 'firstName'),
-                'page' => 'lb_plugin',
-                'section' => 'admin_index',
-                'args' => array(
-                    'label_for' => 'first_name',
-                    'class' => 'example-class'
-                )
+                'page' => 'settings-admin',
+                'section' => 'settings_setting_section'
             ),
             array(
                 'id' => 'environment_choice',
                 'title' => 'Environment',
                 'callback' => array( $this->callbacks, 'environmentChoice'),
-                'page' => 'lb_plugin',
-                'section' => 'admin_index',
-                'args' => array(
-                    'label_for' => 'environment_choice',
-                    'class' => 'example-class'
-                )
+                'page' => 'settings-admin',
+                'section' => 'settings_setting_section'
             )
         );
 

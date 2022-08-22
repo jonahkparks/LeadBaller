@@ -37,25 +37,36 @@ class AdminCallbacks extends BaseController
 
     public function textExample()
     {
-        $value = esc_attr(get_option('text_example'));
-        echo '<input type="text" class="regular-text" name="text_example" value="' . $value . '" placeholder="Write something here">';
+        $settings_options = get_option( 'settings_option_name' );
+        $value = esc_attr($settings_options['text_example']);
+
+        ?>
+			<input class="regular-text" type="text" name="settings_option_name[text_example]" id="text_example" value="<?php echo $value ?>">
+		<?php
     }
 
     public function firstName()
     {
-        $value = esc_attr(get_option('first_name'));
-        echo '<input type="text" class="regular-text" name="first_name" value="' . $value . '" placeholder="Write your first name">';
+        $settings_options = get_option( 'settings_option_name' );
+        $value = esc_attr($settings_options['first_name']);
+
+        ?>
+			<input class="regular-text" type="text" name="settings_option_name[first_name]" id="first_name" value="<?php echo $value ?>">
+		<?php
     }
 
     public function environmentChoice()
     {
-        $value = esc_attr(get_option('environment_choice'));
+        $settings_options = get_option( 'settings_option_name' );
+        $value = esc_attr($settings_options['environment_choice']);
+        
         ?>
-            Value = <?php echo $value ?><br />
-            <select name="environment_choice" id="environment_choice">
-                <option value="test" <?php selected( $value, "test" ); ?>>Test</option>
-                <option value="production" <?php selected( $value, "Production" ); ?>>Production</option>
-            </select>
+            <select name="settings_option_name[environment_choice]" id="environment_choice">
+                <?php $selected = ($value === 'test') ? 'selected' : '' ; ?>
+                <option value="test" <?php echo $selected; ?>>Test</option>
+                <?php $selected = ($value === 'production') ? 'selected' : '' ; ?>
+                <option value="production" <?php echo $selected; ?>>Production</option>
+            </select> 
         <?php
     }
 }
