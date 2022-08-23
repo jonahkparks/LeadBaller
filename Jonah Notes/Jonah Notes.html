@@ -2,17 +2,37 @@
 
 <html>
     <body style ="background-color:dimgrey">
-        <h1> This is a heading</h1>
+        <h1> Fun Stuff</h1>
         <br> <!--This is just a line break-->
-        <p> This is a paragraph</p>
+        <p> This is useless because it doesn't reference anything</p>
         <br>
         <br>
         <form>
-            <!--Easy un/pw-->
+            <u>Easy UN/PW</u>
             <p style="padding: 10px; border: 1px solid black;">
             <b><i>Enter Username and Password</b></i><br>
             User ID: <input type="text" name="user_id"> <br>
             Password: <input type="Password" name="Password"></p>
+        </form>
+        <form>
+            
+            <u>More Difficult UN/PW</u>
+            <br>
+            <div class="container">
+                <p style="padding: 10px; border: 1px solid black;">
+                <label><b>Username</b></label>
+                <input type="text" placeholder="Enter Username" name="uname" required>
+
+                <label><b>Password</b></label>
+                <input type="password" placeholder="Enter Password" name="psw" required>
+
+                <button type="submit">Login</button>
+                <input type="checkbox" checked="checked"> Remember me
+                </div>
+             <div class="container" style="background-color:#f1f1f1">
+            <button type="button" class="cancelbtn">Cancel</button>
+            <span class="psw">Forgot <a href="#">password?</a></span>
+        </div>
         </form>
     </body>
 </html>
