@@ -15,9 +15,11 @@ final class Init
     public static function get_services()
     {
         return [
-            Pages\Admin::class,
+            Pages\Settings::class,
             Base\Enqueue::class,
-            Base\SettingsLink::class
+            Base\SettingsLink::class,
+            Base\CustomPostTypeController::class,
+            Base\TableController::class
         ];
     }
 

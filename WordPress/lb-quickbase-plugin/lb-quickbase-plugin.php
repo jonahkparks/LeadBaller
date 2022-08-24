@@ -3,7 +3,7 @@
  * @package lb-quickbase-plugin
  *
  * Plugin Name: LeadBaller QuickBase Plugin
- * Description: Handles basic communication with QuickBase
+ * Description: Enables the LeadBaller website to host QuickBase widgets for Email landing pages
  * Version: 1.0.0
  * Author: Jeremy Lahners
  * Text Domain: leadballer-quickbase-plugin

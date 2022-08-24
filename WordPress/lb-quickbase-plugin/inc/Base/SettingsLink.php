@@ -17,7 +17,7 @@ class SettingsLink extends BaseController
 
     public function settings_link($links)
     {
-        $settings_link = '<a href="admin.php?page=settings-admin">Settings</a>';
+        $settings_link = '<a href="admin.php?page=qb_settings_admin">Settings</a>';
         array_push($links, $settings_link);
         return $links;
     }
