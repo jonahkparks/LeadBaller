@@ -10,7 +10,7 @@ use Inc\API\SettingsApi;
 use Inc\Base\BaseController;
 use Inc\API\Callbacks\AdminCallbacks;
 
-class TableController extends BaseController
+class CalendlyWidgetController extends BaseController
 {
 
     public $callbacks;
@@ -19,7 +19,7 @@ class TableController extends BaseController
 
 	public function register()
 	{
-        if ( ! $this->activated( 'table_manager' ) ) return;
+        if ( ! $this->activated( 'calendly_widget' ) ) return;
 
 		$this->settings = new SettingsApi();
 
@@ -35,10 +35,10 @@ class TableController extends BaseController
 		$this->subpages = array(
 			array(
 				'parent_slug' => 'qb_settings_admin', 
-				'page_title' => 'Tables', 
-				'menu_title' => 'Table Manager', 
+				'page_title' => 'Calendly Widget', 
+				'menu_title' => 'Calendly Widget', 
 				'capability' => 'manage_options', 
-				'menu_slug' => 'manage_tables', 
+				'menu_slug' => 'manage_calendly', 
 				'callback' => array( $this->callbacks, 'environmentsPage' )
 			)
 		);

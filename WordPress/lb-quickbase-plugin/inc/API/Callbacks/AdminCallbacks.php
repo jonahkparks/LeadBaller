@@ -20,6 +20,11 @@ class AdminCallbacks extends BaseController
         return require_once("$this->plugin_path/templates/environments.php");
     }
 
+    public function cptManagerPage()
+    {
+        return require_once("$this->plugin_path/templates/cpt_manager.php");
+    }
+
     public function tablesPage()
     {
         return require_once("$this->plugin_path/templates/tables.php");

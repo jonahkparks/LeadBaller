@@ -12,12 +12,14 @@ class Activate
     {
         flush_rewrite_rules();
 
-        if ( get_option( 'qb_settings_admin' )) {
-            return;
-        }
-
         $admin_defaults = array();
 
-        update_option( 'qb_settings_admin', $admin_defaults );
+        if ( !get_option( 'qb_settings_admin' )) {
+            update_option( 'qb_settings_admin', $admin_defaults );
+        }
+
+        if ( !get_option( 'qb_cpt_admin' )) {
+            update_option( 'qb_cpt_admin', $admin_defaults );
+        }
     }
 }
