@@ -41,18 +41,19 @@ class VideoShortcode
             }
         }
 
-        $app_token = $active_option['app_token'];
+        $app_token = '';
         $realm = $active_option['realm_name'];
-        $user_token = '';
+        $user_token = $active_option['app_token'];
         $user_agent = '';
 
         $query_table = $active_option['prospects_table'];
         $select = array($active_option['video_url_field']);
-        $where = '{' . $active_option['merge_url_field'] . '.EX.' . $merge_url . '}';
+        $where = "{" . $active_option['merge_url_field'] . ".EX.'" . $merge_url . "'}";
 
         $QuickBaseAPI = new QuickBaseRestAPI($user_token, $app_token, $realm, $user_agent);
-        $QuickBaseAPI->get_and_set_temporary_access_token($query_table);
-        $video_url = $QuickBaseAPI->query_for_data($query_table, $select , $where);
+
+        $response = $QuickBaseAPI->query_for_data($query_table, $select , $where);
+        $video_url = json_decode($response, true)['data']['0'][$active_option['video_url_field']]['value'];
 
         if (isset($video_url)) 
         {

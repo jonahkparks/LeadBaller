@@ -21,6 +21,7 @@
     "browser-sync": "^2.27.10",
     "browserify": "^17.0.0",
     "browserify-shim": "^3.8.15",
+    "gulp": "^3.9.1",
     "gulp-autoprefixer": "^6.1.0",
     "gulp-concat": "^2.6.1",
     "gulp-if": "^3.0.0",
@@ -33,14 +34,14 @@
     "gulp-strip-debug": "^3.0.0",
     "gulp-uglify": "^3.0.2",
     "gulp-uglifycss": "^1.1.0",
+    "npm-check-updates": "^16.0.5",
     "sass": "^1.54.5",
     "vinyl-buffer": "^1.0.1",
-    "vinyl-source-stream": "^2.0.0",
-    "gulp": "^3.9.1",
-    "npm-check-updates": "^16.0.5"
+    "vinyl-source-stream": "^2.0.0"
   },
   "dependencies": {
-    "code-prettify": "^0.1.0"
+    "code-prettify": "^0.1.0",
+    "curl": "^0.1.4"
   },
   "overrides": {
     "graceful-fs": "^4.2.10"

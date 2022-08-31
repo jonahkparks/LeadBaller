@@ -62,7 +62,7 @@
 
   public function get_access_token()
   {
-      return $this->$access_token;
+      return $this->access_token;
   }
 
   /**
@@ -70,7 +70,6 @@
   *
   * @param string $db_id The id of the database you want access to. Required.
   */
-
   public function get_and_set_temporary_access_token($db_id)
   {
       $headers = array(
@@ -91,6 +90,8 @@
       $response = curl_exec($ch);
       $token = json_decode($response, true)['temporaryAuthorization'];
       $this->set_access_token($token);
+
+      curl_close($ch);
   }
 
   /**
@@ -132,6 +133,8 @@
       if (curl_errno($ch)) {
           error_log("There was an error with the QuickBaseRestApi call/n". "The HTTP Error Code recieved was: ".curl_errno($ch));
       }
+
+      curl_close($ch);
 
       return $response;
   }
