@@ -15,11 +15,6 @@ class AdminCallbacks extends BaseController
         return require_once("$this->plugin_path/templates/admin.php");
     }
 
-    public function environmentsPage()
-    {
-        return require_once("$this->plugin_path/templates/environments.php");
-    }
-
     public function cptManagerPage()
     {
         return require_once("$this->plugin_path/templates/cpt_manager.php");
@@ -27,7 +22,12 @@ class AdminCallbacks extends BaseController
 
     public function tablesPage()
     {
-        return require_once("$this->plugin_path/templates/tables.php");
+        return require_once("$this->plugin_path/templates/table_manager.php");
+    }
+
+    public function videoWidgetPage()
+    {
+        return require_once("$this->plugin_path/templates/video_widget_manager.php");
     }
 
     public function optionGroups($input)

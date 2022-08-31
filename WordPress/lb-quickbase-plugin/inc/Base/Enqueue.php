@@ -17,6 +17,9 @@ class Enqueue extends BaseController
 
     public function enqueue()
     {
+        wp_enqueue_script( 'media-upload' );
+        wp_enqueue_media();
+        
         wp_enqueue_style('mypluginstyle', $this->plugin_url . 'assets/css/lb-quickbase.css');
         wp_enqueue_script('mypluginscript', $this->plugin_url . 'assets/js/lb-quickbase.js');
     }

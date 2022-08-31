@@ -26,7 +26,7 @@ class ManagerCallbacks extends BaseController
 
     public function adminSectionManager($input)
     {
-        echo 'Manage the Sections and Features of this Plugin by activating the checkboxes below';
+        echo 'Manage the Table and Field settings of the Plugin below';
     }
 
     public function checkboxField( $args)

@@ -1,5 +1,6 @@
 <div class="wrap">
-    <h1>QuickBase Plugin Settings</h1>
+    <h1>LeadBaller Email Landing Plugin Settings</h1>
+    <br />
     <?php settings_errors(); ?>
 
     <ul class="nav nav-tabs">
