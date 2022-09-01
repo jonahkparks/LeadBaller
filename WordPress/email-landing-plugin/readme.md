@@ -18,3 +18,9 @@
 3. Class will return video URL, logo URL and calendly snippet to page
 4. Widgets / Shortcodes will execute using returned values from Class
 
+## Remaining work
+
+1. Ensure only one environment can be active at a time
+2. Have plugin respond if invalid ID or no ID is passed 
+3. Respond if no data is found in QuickBase or QuickBase is not responding
+

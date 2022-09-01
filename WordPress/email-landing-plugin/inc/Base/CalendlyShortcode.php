@@ -52,18 +52,20 @@ class CalendlyShortcode
         $where = "{" . $active_option['merge_url_field'] . ".EX.'" . $merge_url . "'}";
 
         $QuickBaseAPI = new QuickBaseRestAPI($user_token, $app_token, $realm, $user_agent);
+
+        $response = $QuickBaseAPI->query_for_data($query_table, $select , $where);
         $campaign_id = json_decode($response, true)['data']['0'][$active_option['related_campaign_field']]['value'];
 
         $query_table = $active_option['campaign_table'];
-        $select = array($active_option['client_logo']);
+        $select = array($active_option['calendly_field']);
         $where = "{" . $active_option['campaign_id'] . ".EX." . $campaign_id . "}";
 
-        $QuickBaseAPI->get_and_set_temporary_access_token($query_table);
-        $logo_url = json_decode($response, true)['data']['0'][$active_option['client_logo']]['value'];
+        $response = $QuickBaseAPI->query_for_data($query_table, $select , $where);
+        $calendly_embed = json_decode($response, true)['data']['0'][$active_option['calendly_field']]['value'];
 
-        if (isset($logo_url))
+        if (isset($calendly_embed))
         {
-            $output = '<img src="'. $logo_url . '">';
+            $output = $calendly_embed;
         }
 
         return $output;

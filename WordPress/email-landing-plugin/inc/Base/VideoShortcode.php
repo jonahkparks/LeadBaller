@@ -57,7 +57,7 @@ class VideoShortcode
 
         if (isset($video_url)) 
         {
-            $output = '<video width="600" controls><source src="'. $video_url . '" type="video/mp4"></video>';
+            $output = '<video width="600" height="500" controls><source src="'. $video_url . '" type="video/mp4"></video>';
         }
 
         return $output;
