@@ -51,7 +51,33 @@ class Callbacks extends BaseController
 
         // TODO: Figure out how to check if is_active = true then change all other environments to is_active = false
 
+        // if( isset($input['is_active']) )
+        // {
+        //     $this->resetActiveEnvironment($input['env_name']);
+        // }
+
         return $output;
+    }
+
+    public function resetActiveEnvironment( $new_env )
+    {
+        $output = get_option( 'email_landing_options' );
+
+        foreach ($output as $key => $value)
+        {
+            if( $key !== $new_env )
+            {
+                if (isset($output[$key]['is_active'])) 
+                {
+                    unset($output[$key]['is_active']);
+                }
+            }
+        }
+
+        var_dump($output);
+        die;
+
+        update_option( 'email_landing_options', $output );
     }
 
     public function settingsPage()

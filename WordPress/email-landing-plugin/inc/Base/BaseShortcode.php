@@ -38,7 +38,7 @@ class BaseShortcode
         if (!isset($_GET['id']))
         {
             $this->redirect();
-            exit;
+            return;
         }
         
         return base64_decode($_GET['id']);
@@ -46,7 +46,10 @@ class BaseShortcode
 
     public function redirect()
     {
-        echo '<script>window.location.replace("' . $this->lb_redirect . '");</script>';
+        global $post;
+        if (isset($post->post_name) && $post->post_name == 'booking') {
+            echo '<script>window.location.replace("' . $this->lb_redirect . '");</script>';
+        }
     }
 
     public function decodeID()
