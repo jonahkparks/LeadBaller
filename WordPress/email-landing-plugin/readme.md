@@ -21,6 +21,3 @@
 ## Remaining work
 
 1. Ensure only one environment can be active at a time
-2. Have plugin respond if invalid ID or no ID is passed 
-3. Respond if no data is found in QuickBase or QuickBase is not responding
-
