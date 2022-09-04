@@ -31,4 +31,10 @@ class BaseController
 
 		return isset( $option[ $key ] ) ? $option[ $key ] : false;
 	}
+
+    public function consoleLog( $output )
+    {
+        var_dump($output);
+        //echo "<script>console.log('" . $output . "');</script>";
+    }
 }

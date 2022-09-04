@@ -20,4 +20,3 @@
 
 ## Remaining work
 
-1. Ensure only one environment can be active at a time

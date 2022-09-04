@@ -13,7 +13,6 @@ class Callbacks extends BaseController
 
     public function tableSanitize($input) 
     {
-        
         $output = get_option( 'email_landing_options' );
         
         // Handle removing a single environment
@@ -36,6 +35,7 @@ class Callbacks extends BaseController
         // Handle adding additional environments
         foreach ($output as $key => $value)
         {
+            
             // Handle edit case when environment is empty
             if (!isset($input['env_name'])) {
                 $input = array_merge(array('env_name' => $_POST['env_name']), $input);
@@ -45,39 +45,15 @@ class Callbacks extends BaseController
             {
                 $output[$key] = $input;
             } else {
+                if( isset($input['is_active']) )
+                {
+                    unset($output[$key]['is_active']);
+                }
                 $output[$input['env_name']] = $input;
             }
         }
 
-        // TODO: Figure out how to check if is_active = true then change all other environments to is_active = false
-
-        // if( isset($input['is_active']) )
-        // {
-        //     $this->resetActiveEnvironment($input['env_name']);
-        // }
-
         return $output;
-    }
-
-    public function resetActiveEnvironment( $new_env )
-    {
-        $output = get_option( 'email_landing_options' );
-
-        foreach ($output as $key => $value)
-        {
-            if( $key !== $new_env )
-            {
-                if (isset($output[$key]['is_active'])) 
-                {
-                    unset($output[$key]['is_active']);
-                }
-            }
-        }
-
-        var_dump($output);
-        die;
-
-        update_option( 'email_landing_options', $output );
     }
 
     public function settingsPage()
