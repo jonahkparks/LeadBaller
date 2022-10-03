@@ -1,7 +1,7 @@
 {
-  "name": "lb-quickbase-plugin",
+  "name": "email-landing-plugin",
   "version": "1.0.0",
-  "description": "Enables the LeadBaller website to host QuickBase widgets for Email landing pages",
+  "description": "Provides widgets for Email Campaign landing pages",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },

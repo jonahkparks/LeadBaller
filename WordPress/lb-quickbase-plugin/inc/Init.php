@@ -20,7 +20,6 @@ final class Init
             Base\SettingsLink::class,
             Base\CustomPostTypeController::class,
             Base\TableController::class,
-            Base\CalendlyWidgetController::class,
             Base\VideoWidgetController::class
         ];
     }

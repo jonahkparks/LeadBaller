@@ -1,15 +1,20 @@
 # LeadBaller QuickBase plugin
-## Remaining work to do
+## Overview of planned plugin
 
-List of things to finish up
+* Create a plugin settings page allowing users to enter authentication token, QuickBase table IDs
+* Create authentication class for handling all authentication to QuickBase
+* Create video widget / shortcode class
+* Create client logo widget / shortcode class
+* Create client calendly widget / shortcode class
+* Create page to host widgets
 
-* Modular admin area
-* Admin page for QuickBase table definitions
-* Admin page for QuickBase environment selection
-* Admin page for QuickBase environment definition & token definition
-* CPTs, as needed
-* Custom Taxonomy Manager
-* Ajax-based authentication to QuickBase
-* Widget for displaying client logo
-* Widget for displaying client calendly link
-* Widget for displaying prospect video
+## Overview of communication
+
+1. On page load, URL parameter will contain a Base64-encoded string unique to the individual prospect (get_query_var() or $_GET['param_name'])
+2. Class / Function will fire, getting video URL, logo URL and calendly snippet
+   1. Will call Authentication class to get current auth token
+   2. If no auth token available, Authentication class will make auth call and get auth token
+   3. Class will query QuickBase where Base64-decoded code = Prospect Record ID in Prospects table
+3. Class will return video URL, logo URL and calendly snippet to page
+4. Widgets / Shortcodes will execute using returned values from Class
+

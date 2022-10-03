@@ -39,8 +39,8 @@ class Settings extends BaseController
     {
         $this->pages = array(
             array(
-                'page_title' => 'LB QuickBase Plugin',
-                'menu_title' => 'QuickBase',
+                'page_title' => 'LeadBaller Email Landing Plugin',
+                'menu_title' => 'Email Settings',
                 'capability' => 'manage_options',
                 'menu_slug' => 'qb_settings_admin',
                 'callback' => array($this->callbacks, 'adminDashboard'),

@@ -15,9 +15,9 @@ class CPTCallbacks
 
     public function cptSanitize($input) 
     {
-
         $output = get_option( 'qb_cpt_admin' );
         
+        // Handle removing a single post type
         if (isset($_POST['remove']))
         {
             $remove = filter_input( INPUT_POST, 'remove', FILTER_SANITIZE_STRING, array( 'default' => false ) ); 
@@ -26,6 +26,7 @@ class CPTCallbacks
             return $output;
         }
 
+        // Handle adding the first post type 
         if ( count($output) == 0 )
         {
             $output[$input['post_type']] = $input;
@@ -33,8 +34,14 @@ class CPTCallbacks
             return $output;
         }
 
+        // Handle adding additional post types
         foreach ($output as $key => $value)
         {
+            // Handle edit case when post_type is empty
+            if (!isset($input['post_type'])) {
+                $input = array_merge(array('post_type' => $_POST['post_type']), $input);
+            }
+
             if( $input['post_type'] === $key )
             {
                 $output[$key] = $input;
