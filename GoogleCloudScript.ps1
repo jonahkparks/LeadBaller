@@ -10,4 +10,4 @@ foreach($file in $files) {
     Rename-Item {$file."Output Video Name" + ".png"} {$file."New Video ID" + ".png"}
 }
 
-echo $file.'Output Video Name' & ".png"
+echo $file.'Output Video Name' + ".png"
