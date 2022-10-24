@@ -35,5 +35,3 @@ foreach($file in $files) {
         $totalFiles++
     }
 }
-
-Write-Output $totalFiles
