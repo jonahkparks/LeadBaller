@@ -1,4 +1,4 @@
-$files = Import-Csv "C:\Users\Jonah\Desktop\GCloudList.csv"
+$files = Import-Csv "C:\Users\Jonah\Downloads\CloudList.csv"
 
 #This command finds and replaces old video names with new video names
 foreach($file in $files) {
