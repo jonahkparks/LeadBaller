@@ -2,7 +2,16 @@ $files = Import-Csv "C:\Users\Jonah\Desktop\GCloudList.csv"
 
 #This command finds and replaces old video names with new video names
 foreach($file in $files) {
-    Rename-Item {$file."Output Video Name" + ".mp4"} {$file."New Video ID" + ".mp4"}
+    $oldFile = $file."Output Video Name"
+    $oldFile += ".mp4"
+
+    $newFile = $file."New Video ID"
+    $newFile += ".mp4"
+
+    echo $oldFile
+    echo $newFile
+
+    #Rename-Item {$file."Output Video Name" + ".mp4"} {$file."New Video ID" + ".mp4"}
 }
 
 #This command finds and replaces old image names with new image names
