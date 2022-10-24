@@ -1,5 +1,7 @@
 $files = Import-Csv "C:\Users\Jonah\Desktop\GCloudList.csv"
 
+$totalFiles = 0
+
 #This command finds and replaces old video names with new video names
 foreach($file in $files) {
     $oldFile = $file.EmailUniqueID
@@ -11,7 +13,10 @@ foreach($file in $files) {
     # Write-Output $oldFile
     # Write-Output $newFile
 
-    Rename-Item -Path $oldFile -NewName $newFile
+    if (Test-Path -Path $oldFile) {
+        Rename-Item -Path $oldFile -NewName $newFile
+        $totalFiles++
+    }
 }
 
 #This command finds and replaces old image names with new image names
@@ -25,5 +30,8 @@ foreach($file in $files) {
     # Write-Output $oldFile
     # Write-Output $newFile
 
-    Rename-Item -Path $oldFile -NewName $newFile
+    if (Test-Path -Path $oldFile) {
+        Rename-Item -Path $oldFile -NewName $newFile
+        $totalFiles++
+    }
 }
