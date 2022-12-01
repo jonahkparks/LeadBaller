@@ -1,38 +1,52 @@
 <!--F1 then htmlplay to view interactive page-->
 <!DOCTYPE html>
 <html>
-    <body style ="background-color:dimgrey">
+    <body style ="background-color:rgb(214, 214, 214)">
         <h1> Fun Stuff</h1>
         <br> <!--This is just a line break-->
-        <p> This is useless because it doesn't reference anything</p>
+        <p><i>This is useless because it doesn't reference anything</i></p>
         <br>
         <br>
         <form>
-            <u>Easy UN/PW</u>
-            <p style="padding: 10px; border: 1px solid black;">
+            <u><b>Easy UN/PW</b></u>
+            <p style="padding: 10px; border: 2px solid black;">
             <b><i>Enter Username and Password</b></i><br>
-            User ID: <input type="text" name="user_id"> <br>
-            Password: <input type="Password" name="Password"></p>
+            User ID: <input type="text" name="user_id" placeholder="Enter Username" style="border: 2px solid black"> <br>
+            Password: <input type="Password" name="Password" placeholder="Enter Password" style="border: 2px solid black"></p>
         </form>
+        <br>
         <form>
             
-            <u>More Difficult UN/PW</u>
+            <u><b>More Difficult UN/PW</b></u>
             <br>
             <div class="container">
-                <p style="padding: 10px; border: 1px solid black;">
+                <p style="padding: 10px; border: 2px solid black;">
                 <label><b>Username</b></label>
-                <input type="text" placeholder="Enter Username" name="uname" required>
+                <input type="text" placeholder="Enter Username" name="uname" style="border: 2px solid black" required>
 
                 <label><b>Password</b></label>
-                <input type="password" placeholder="Enter Password" name="psw" required>
+                <input type="password" placeholder="Enter Password" name="psw" style="border: 2px solid black" required>
 
                 <button type="submit">Login</button>
                 <input type="checkbox" checked="checked"> Remember me
                 </div>
-             <div class="container" style="background-color:#f1f1f1">
+             <div class="container" style="background-color:#d4d4d4">
             <button type="button" class="cancelbtn">Cancel</button>
             <span class="psw">Forgot <a href="#">password?</a></span>
         </div>
         </form>
     </body>
+</html>
+<br>
+<html>
+    <form>
+        <u><b>Review Section</b></u>
+        <p style="padding: 10px; border: 2px solid black">
+            <label><b>Please write us a review!</b></label>
+            <br>
+            <textarea rows="8" cols="50" name="Review"> 
+        </textarea>
+        <br>
+        <input type="Submit" value="Submit"
+    </form>
 </html>
